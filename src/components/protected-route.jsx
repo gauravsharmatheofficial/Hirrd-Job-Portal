@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
   const { isSignedIn, user, isLoaded } = useUser();
-  const { pathName } = useLocation();
+  const { pathname } = useLocation();
 
   if (isLoaded && !isSignedIn && isSignedIn !== undefined) {
     return <Navigate to="/?sign-in=true" />;
@@ -13,10 +13,11 @@ function ProtectedRoute({ children }) {
   if (
     user !== undefined &&
     !user?.unsafeMetadata?.role &&
-    pathName !== "/onboarding"
+    pathname !== "/onboarding"
   ) {
     return <Navigate to="/onboarding" />;
   }
+
   return children;
 }
 
