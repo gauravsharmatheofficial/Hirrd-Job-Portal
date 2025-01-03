@@ -1,5 +1,5 @@
 import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
-import ApplyJobDrawer from "@/components/apply-job";
+import ApplyJobDrawer from "../components/apply-job";
 import {
   Select,
   SelectContent,
@@ -108,6 +108,8 @@ function JobPage() {
       />
 
       {/* render application  */}
+
+
       {job?.recruiter_id !== user?.id && (
         <ApplyJobDrawer
           job={job}
