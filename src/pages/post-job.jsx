@@ -162,7 +162,12 @@ const PostJob = () => {
           name="requirements"
           control={control}
           render={({ field }) => (
-            <MarkdownEditor value={field.value} onChange={field.onChange} />
+            <MarkdownEditor
+              minHeight="200px"
+              height="400px"
+              value={field.value}
+              onChange={field.onChange}
+            />
           )}
         />
         {errors.requirements && (
