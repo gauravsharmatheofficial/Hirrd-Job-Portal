@@ -14,9 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { updateApplicationStatus } from "@/api/apiApplication";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "../hooks/use-fetch";
 import { BarLoader } from "react-spinners";
+import { updateApplicationStatus } from "../api/apiApplications";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
   const handleDownload = () => {
