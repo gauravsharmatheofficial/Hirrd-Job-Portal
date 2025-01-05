@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import LandingPage from "./pages/landingPage.jsx";
 import AppLayout from "./layouts/app-layout";
 import Onboarding from "./pages/onboarding";
 import JobListing from "./pages/job-listing";
@@ -10,6 +9,7 @@ import MyJobs from "./pages/my-jobs";
 import { ThemeProvider } from "./components/theme-provider";
 import ProtectedRoute from "./components/protected-route";
 import PostJob from "./pages/post-job";
+import LandingPage from "@/pages/landingPage";
 
 const router = createBrowserRouter([
   {
