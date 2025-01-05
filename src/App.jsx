@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import LandingPage from "@/pages/landingPage";
+import LandingPage from "./pages/landingPage";
 import AppLayout from "./layouts/app-layout";
 import Onboarding from "./pages/onboarding";
 import JobListing from "./pages/job-listing";
