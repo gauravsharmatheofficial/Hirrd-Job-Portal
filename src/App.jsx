@@ -1,29 +1,39 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
 import "./App.css";
-import LandingPage from "./pages/landingPage.jsx";
 import AppLayout from "./layouts/app-layout";
-import Onboarding from "./pages/onboarding";
-import JobListing from "./pages/job-listing";
-import JobPage from "./pages/job";
-import SavedJobs from "./pages/saved-job";
-import MyJobs from "./pages/my-jobs";
 import { ThemeProvider } from "./components/theme-provider";
 import ProtectedRoute from "./components/protected-route";
-import PostJob from "./pages/post-job";
 
+// Lazy-load components
+const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
+const Onboarding = lazy(() => import("./pages/onboarding"));
+const JobListing = lazy(() => import("./pages/job-listing"));
+const JobPage = lazy(() => import("./pages/job"));
+const SavedJobs = lazy(() => import("./pages/saved-job"));
+const MyJobs = lazy(() => import("./pages/my-jobs"));
+const PostJob = lazy(() => import("./pages/post-job"));
+
+// Router configuration
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <LandingPage />,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <LandingPage />
+          </Suspense>
+        ),
       },
       {
         path: "/onboarding",
         element: (
           <ProtectedRoute>
-            <Onboarding />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Onboarding />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -31,7 +41,9 @@ const router = createBrowserRouter([
         path: "/jobs",
         element: (
           <ProtectedRoute>
-            <JobListing />
+            <Suspense fallback={<div>Loading...</div>}>
+              <JobListing />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -39,7 +51,9 @@ const router = createBrowserRouter([
         path: "/job/:id",
         element: (
           <ProtectedRoute>
-            <JobPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <JobPage />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -47,7 +61,9 @@ const router = createBrowserRouter([
         path: "/post-job",
         element: (
           <ProtectedRoute>
-            <PostJob />
+            <Suspense fallback={<div>Loading...</div>}>
+              <PostJob />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -55,7 +71,9 @@ const router = createBrowserRouter([
         path: "/saved-jobs",
         element: (
           <ProtectedRoute>
-            <SavedJobs />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SavedJobs />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -63,20 +81,21 @@ const router = createBrowserRouter([
         path: "/my-jobs",
         element: (
           <ProtectedRoute>
-            <MyJobs />
+            <Suspense fallback={<div>Loading...</div>}>
+              <MyJobs />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
     ],
   },
 ]);
+
 function App() {
   return (
-    <>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

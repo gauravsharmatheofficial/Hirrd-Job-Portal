@@ -9,4 +9,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-router-dom"], // Split large libraries
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Increase chunk size warning limit
+  },
 });

@@ -1,16 +1,16 @@
 import { useUser } from "@clerk/clerk-react";
 import ApplicationCard from "./application-card";
 import { useEffect } from "react";
-import { BarLoader } from "react-spinners";
+import { getApplications } from "../api/apiApplications";
 import useFetch from "@/hooks/use-fetch";
-import { getApplications } from "@/api/apiApplications";
+import { BarLoader } from "react-spinners";
 
 const CreatedApplications = () => {
   const { user } = useUser();
 
   const {
     loading: loadingApplications,
-    data: application,
+    data: applications,
     fn: fnApplications,
   } = useFetch(getApplications, {
     user_id: user.id,
@@ -27,7 +27,7 @@ const CreatedApplications = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      {application?.map((application) => {
+      {applications?.map((application) => {
         return (
           <ApplicationCard
             key={application.id}
@@ -41,3 +41,4 @@ const CreatedApplications = () => {
 };
 
 export default CreatedApplications;
+
